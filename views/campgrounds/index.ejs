@@ -1,0 +1,70 @@
+<% layout('layouts/boilerplate') %>
+
+<div id="cluster-map" class="mb-3"></div>
+
+<!-- <ul>
+    <% for(let campground of campgrounds) { %>
+        <div class="card mb-3 h-100">
+            <div class="row no-gutters">
+                <div class="col-md-4">
+
+                    <img src="<%= campground.images[0].url %>" alt="" class="img-fluid h-70 w-100">
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <h5 class="card-title"><%= campground.title %></h5>
+                        <p class="card-text"><%= campground.description %></p>
+                        <p class="card-text">
+                            <small class="text-secondary"><%= campground.location %></small>
+                        </p>
+                        <a href="/campgrounds/<%= campground._id %>" class="btn bg-primary btn-sm"> View Campground </a>
+                    </div>                        
+                </div>                    
+            </div>
+        </div>
+    <% } %>
+</ul> -->
+    
+<ul class="list-unstyled">
+    <% for(let campground of campgrounds) { %>
+        <li>
+            <div class="card mb-3 h-100">
+                <div class="row no-gutters">
+                    <div class="col-md-4">
+                        <div class="img-container">
+                            <img src="<%= campground.images[0].url %>" alt="" class="img-fluid w-100 h-100">
+                        </div>
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h5 class="card-title"><%= campground.title %></h5>
+                            <p class="card-text"><%= campground.description %></p>
+                            <p class="card-text">
+                                <small class="text-secondary"><%= campground.location %></small>
+                            </p>
+                            <a href="/campgrounds/<%= campground._id %>" class="btn btn-primary btn-sm"> View Campground </a>
+                        </div>                        
+                    </div>                    
+                </div>
+            </div>
+        </li>
+    <% } %>
+</ul>
+
+<style>
+    .img-container {
+        height: 250px; /* Set a fixed height */
+        overflow: hidden; /* Ensures that any overflow is hidden */
+    }
+    .img-fluid {
+        object-fit: cover; /* Ensures the image covers the entire container */
+        height: 100%; /* Makes the image height match the container's height */
+    }
+</style>
+
+<script>
+    const maptilerApiKey = '<%- process.env.MAPTILER_API_KEY %>';
+    const campgrounds = { features: <%- JSON.stringify(campgrounds) %>}
+  </script>
+
+<script src="/javascripts/clusterMap.js"></script>
